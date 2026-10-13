@@ -32,3 +32,22 @@ npm run preview
 所有数据为示例，刷新会重置。战斗伤害用于动画预览，不修改真实资产。未接入登录、数据库、真实联机、后台通知或 PWA 离线缓存。后续真实业务计算必须迁移至服务端，不能沿用客户端演示交易作为权威结算。
 
 技术：React、TypeScript、Vite、Motion、Lucide，自定义 CSS 设计系统。
+
+## 容器与 Sealos 部署
+
+项目提供 `Dockerfile`，构建阶段生成静态资源，运行阶段由 Nginx 在 `8080` 端口提供服务。当前版本没有数据库或需要持久化的服务端数据，因此不挂载存储；后续接入数据库时必须改用持久化卷并先备份数据。镜像中不包含环境密钥。
+
+```sh
+docker login ccr.ccs.tencentyun.com
+docker buildx build --platform linux/amd64 \
+  -t ccr.ccs.tencentyun.com/tenvoice/gerous-game:v0.1.0 \
+  --push .
+```
+
+`deploy/sealos.yaml` 是 Sealos 应用模板，使用 TCR 私有镜像、`8080` 容器端口、HTTPS Ingress 和健康检查。私有仓库拉取凭据应在 Sealos 的应用配置中作为 Image Pull Secret 管理，不要提交到 Git。
+
+当前公网预览：
+
+<https://gerous-game-ibppyqeh.sealoshzh.site>
+
+后续更新时，先构建新的 `vX.Y.Z` 镜像并推送 TCR，再在 Sealos 原应用 `gerous-game-ehlezgsv` 中更新镜像，继续沿用原 Service、Ingress 和访问地址。
