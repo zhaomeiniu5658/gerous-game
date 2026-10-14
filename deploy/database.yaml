@@ -1,0 +1,94 @@
+apiVersion: app.sealos.io/v1
+kind: Template
+metadata:
+  name: gerous-users-db
+spec:
+  title: '仇恨体系用户数据库'
+  description: '持久保存注册用户与会话'
+  url: 'https://github.com/zhaomeiniu5658/gerous-game'
+  gitRepo: 'https://github.com/zhaomeiniu5658/gerous-game'
+  author: 'zhaomeiniu5658'
+  readme: ''
+  icon: ''
+  templateType: inline
+  locale: zh
+  categories: []
+  defaults:
+    app_name:
+      type: string
+      value: gerous-users-db-20261014
+  inputs: {}
+---
+apiVersion: apps.kubeblocks.io/v1alpha1
+kind: Cluster
+metadata:
+  name: ${{ defaults.app_name }}-pg
+  labels:
+    kb.io/database: postgresql-16.4.0
+    clusterdefinition.kubeblocks.io/name: postgresql
+    clusterversion.kubeblocks.io/name: postgresql-16.4.0
+    cloud.sealos.io/deploy-on-sealos: ${{ defaults.app_name }}
+spec:
+  affinity:
+    podAntiAffinity: Preferred
+    tenancy: SharedNode
+  clusterDefinitionRef: postgresql
+  clusterVersionRef: postgresql-16.4.0
+  terminationPolicy: Delete
+  componentSpecs:
+    - componentDefRef: postgresql
+      name: postgresql
+      replicas: 1
+      disableExporter: true
+      enabledLogs: [running]
+      serviceAccountName: ${{ defaults.app_name }}-pg
+      switchPolicy: { type: Noop }
+      resources:
+        limits: { cpu: 500m, memory: 512Mi }
+        requests: { cpu: 50m, memory: 51Mi }
+      volumeClaimTemplates:
+        - name: data
+          spec:
+            accessModes: [ReadWriteOnce]
+            resources: { requests: { storage: 3Gi } }
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: ${{ defaults.app_name }}-pg
+  labels:
+    sealos-db-provider-cr: ${{ defaults.app_name }}-pg
+    app.kubernetes.io/instance: ${{ defaults.app_name }}-pg
+    app.kubernetes.io/managed-by: kbcli
+    cloud.sealos.io/deploy-on-sealos: ${{ defaults.app_name }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: ${{ defaults.app_name }}-pg
+  labels:
+    sealos-db-provider-cr: ${{ defaults.app_name }}-pg
+    app.kubernetes.io/instance: ${{ defaults.app_name }}-pg
+    app.kubernetes.io/managed-by: kbcli
+    cloud.sealos.io/deploy-on-sealos: ${{ defaults.app_name }}
+rules:
+  - apiGroups: ['*']
+    resources: ['*']
+    verbs: ['*']
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: ${{ defaults.app_name }}-pg
+  labels:
+    sealos-db-provider-cr: ${{ defaults.app_name }}-pg
+    app.kubernetes.io/instance: ${{ defaults.app_name }}-pg
+    app.kubernetes.io/managed-by: kbcli
+    cloud.sealos.io/deploy-on-sealos: ${{ defaults.app_name }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: ${{ defaults.app_name }}-pg
+subjects:
+  - kind: ServiceAccount
+    name: ${{ defaults.app_name }}-pg

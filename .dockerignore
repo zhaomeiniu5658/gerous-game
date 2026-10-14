@@ -7,3 +7,8 @@
 !src/**
 !public/**
 !deploy/nginx.conf
+!server/
+!server/**
+
+!shared/
+!shared/**

@@ -1,0 +1,8 @@
+export type Invitation = { id: string; name: string };
+export function captureInvitation(): Invitation | null {
+ try { const url = new URL(location.href); const id = url.searchParams.get('invite'); const name = url.searchParams.get('inviter')?.trim(); if (id && /^1[3-9]\d{9}$/.test(id) && name && name.length <= 16) { const value = { id, name }; sessionStorage.setItem('gerous-pending-invite', JSON.stringify(value)); return value; } const stored = JSON.parse(sessionStorage.getItem('gerous-pending-invite') ?? 'null'); return stored && /^1[3-9]\d{9}$/.test(stored.id) && typeof stored.name === 'string' && stored.name.length > 0 && stored.name.length <= 16 ? stored : null; } catch { return null; }
+}
+export function invitationLink(id: string, name: string) { const url = new URL(location.pathname, location.origin); url.searchParams.set('invite', id); url.searchParams.set('inviter', name); return url.href; }
+export function readInvitedFriends(id: string): Invitation[] { try { const value = JSON.parse(localStorage.getItem(`gerous-invite-friends-${id}`) ?? '[]'); return Array.isArray(value) ? value.filter(f => /^1[3-9]\d{9}$/.test(f.id) && typeof f.name === 'string' && f.name.length <= 16 && f.id !== id) : []; } catch { return []; } }
+export function addInvitationFriend(owner: string, friend: Invitation) { if (owner === friend.id) return; const current = readInvitedFriends(owner); if (!current.some(f => f.id === friend.id)) localStorage.setItem(`gerous-invite-friends-${owner}`, JSON.stringify([...current, friend])); }
+export function finishInvitation() { sessionStorage.removeItem('gerous-pending-invite'); const url = new URL(location.href); url.searchParams.delete('invite'); url.searchParams.delete('inviter'); history.replaceState(null, '', url); }

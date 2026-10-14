@@ -1,0 +1,868 @@
+{
+  "schemaVersion": 1,
+  "canvas": {
+    "width": 1000,
+    "height": 1600
+  },
+  "defaultCharacterId": "male_01",
+  "categories": [
+    {
+      "id": "hair",
+      "name": "发型"
+    },
+    {
+      "id": "top",
+      "name": "上衣"
+    },
+    {
+      "id": "bottom",
+      "name": "下装"
+    },
+    {
+      "id": "shoes",
+      "name": "鞋子"
+    },
+    {
+      "id": "hat",
+      "name": "帽子"
+    },
+    {
+      "id": "accessory",
+      "name": "配饰"
+    },
+    {
+      "id": "weapon",
+      "name": "武器"
+    }
+  ],
+  "characters": [
+    {
+      "characterId": "male_01",
+      "name": "小卷",
+      "gender": "male",
+      "face": "柔和圆脸",
+      "hairstyle": "蓬松短发",
+      "skin": "#f2c8a6",
+      "baseAsset": "/characters/source/male_01-body.svg",
+      "headAsset": "/characters/source/male_01-head.svg",
+      "defaultEquipped": {
+        "hair": "hair_01",
+        "top": "top_shirt",
+        "bottom": "bottom_trousers",
+        "shoes": "shoes_sneakers",
+        "hat": null,
+        "accessory": null,
+        "weapon": null
+      },
+      "baseStats": {
+        "attack": 320,
+        "defense": 0,
+        "health": 100
+      }
+    },
+    {
+      "characterId": "male_02",
+      "name": "阿拓",
+      "gender": "male",
+      "face": "方圆脸",
+      "hairstyle": "侧分短发",
+      "skin": "#e5b18b",
+      "baseAsset": "/characters/source/male_02-body.svg",
+      "headAsset": "/characters/source/male_02-head.svg",
+      "defaultEquipped": {
+        "hair": "hair_02",
+        "top": "top_shirt",
+        "bottom": "bottom_trousers",
+        "shoes": "shoes_sneakers",
+        "hat": null,
+        "accessory": null,
+        "weapon": null
+      },
+      "baseStats": {
+        "attack": 320,
+        "defense": 0,
+        "health": 100
+      }
+    },
+    {
+      "characterId": "male_03",
+      "name": "小宇",
+      "gender": "male",
+      "face": "修长脸",
+      "hairstyle": "微卷短发",
+      "skin": "#ecc1a4",
+      "baseAsset": "/characters/source/male_03-body.svg",
+      "headAsset": "/characters/source/male_03-head.svg",
+      "defaultEquipped": {
+        "hair": "hair_03",
+        "top": "top_shirt",
+        "bottom": "bottom_trousers",
+        "shoes": "shoes_sneakers",
+        "hat": null,
+        "accessory": null,
+        "weapon": null
+      },
+      "baseStats": {
+        "attack": 320,
+        "defense": 0,
+        "health": 100
+      }
+    },
+    {
+      "characterId": "female_01",
+      "name": "小桃",
+      "gender": "female",
+      "face": "鹅蛋脸",
+      "hairstyle": "齐肩短发",
+      "skin": "#f5d4bd",
+      "baseAsset": "/characters/source/female_01-body.svg",
+      "headAsset": "/characters/source/female_01-head.svg",
+      "defaultEquipped": {
+        "hair": "hair_04",
+        "top": "top_tee",
+        "bottom": "bottom_trousers",
+        "shoes": "shoes_sneakers",
+        "hat": null,
+        "accessory": null,
+        "weapon": null
+      },
+      "baseStats": {
+        "attack": 320,
+        "defense": 0,
+        "health": 100
+      }
+    },
+    {
+      "characterId": "female_02",
+      "name": "小岚",
+      "gender": "female",
+      "face": "圆脸",
+      "hairstyle": "长发",
+      "skin": "#e8b797",
+      "baseAsset": "/characters/source/female_02-body.svg",
+      "headAsset": "/characters/source/female_02-head.svg",
+      "defaultEquipped": {
+        "hair": "hair_05",
+        "top": "top_tee",
+        "bottom": "bottom_trousers",
+        "shoes": "shoes_sneakers",
+        "hat": null,
+        "accessory": null,
+        "weapon": null
+      },
+      "baseStats": {
+        "attack": 320,
+        "defense": 0,
+        "health": 100
+      }
+    },
+    {
+      "characterId": "female_03",
+      "name": "小夏",
+      "gender": "female",
+      "face": "心形脸",
+      "hairstyle": "高马尾",
+      "skin": "#d4a17d",
+      "baseAsset": "/characters/source/female_03-body.svg",
+      "headAsset": "/characters/source/female_03-head.svg",
+      "defaultEquipped": {
+        "hair": "hair_06",
+        "top": "top_tee",
+        "bottom": "bottom_trousers",
+        "shoes": "shoes_sneakers",
+        "hat": null,
+        "accessory": null,
+        "weapon": null
+      },
+      "baseStats": {
+        "attack": 320,
+        "defense": 0,
+        "health": 100
+      }
+    }
+  ],
+  "items": [
+    {
+      "itemId": "hair_01",
+      "name": "蓬松短发",
+      "category": "hair",
+      "asset": "/characters/source/hair_01.svg",
+      "price": 0,
+      "layer": 80,
+      "stats": {
+        "attack": 0,
+        "defense": 0,
+        "health": 0
+      },
+      "compatibleCharacters": [
+        "male_01",
+        "male_02",
+        "male_03",
+        "female_01",
+        "female_02",
+        "female_03"
+      ],
+      "unlockCondition": "none",
+      "anchor": {
+        "x": 0,
+        "y": 0
+      },
+      "offset": {
+        "x": 0,
+        "y": 0
+      },
+      "adaptations": {}
+    },
+    {
+      "itemId": "hair_02",
+      "name": "侧分短发",
+      "category": "hair",
+      "asset": "/characters/source/hair_02.svg",
+      "price": 0,
+      "layer": 80,
+      "stats": {
+        "attack": 0,
+        "defense": 0,
+        "health": 0
+      },
+      "compatibleCharacters": [
+        "male_01",
+        "male_02",
+        "male_03",
+        "female_01",
+        "female_02",
+        "female_03"
+      ],
+      "unlockCondition": "none",
+      "anchor": {
+        "x": 0,
+        "y": 0
+      },
+      "offset": {
+        "x": 0,
+        "y": 0
+      },
+      "adaptations": {}
+    },
+    {
+      "itemId": "hair_03",
+      "name": "微卷短发",
+      "category": "hair",
+      "asset": "/characters/source/hair_03.svg",
+      "price": 0,
+      "layer": 80,
+      "stats": {
+        "attack": 0,
+        "defense": 0,
+        "health": 0
+      },
+      "compatibleCharacters": [
+        "male_01",
+        "male_02",
+        "male_03",
+        "female_01",
+        "female_02",
+        "female_03"
+      ],
+      "unlockCondition": "none",
+      "anchor": {
+        "x": 0,
+        "y": 0
+      },
+      "offset": {
+        "x": 0,
+        "y": 0
+      },
+      "adaptations": {}
+    },
+    {
+      "itemId": "hair_04",
+      "name": "齐肩短发",
+      "category": "hair",
+      "asset": "/characters/source/hair_04.svg",
+      "price": 0,
+      "layer": 80,
+      "stats": {
+        "attack": 0,
+        "defense": 0,
+        "health": 0
+      },
+      "compatibleCharacters": [
+        "male_01",
+        "male_02",
+        "male_03",
+        "female_01",
+        "female_02",
+        "female_03"
+      ],
+      "unlockCondition": "none",
+      "anchor": {
+        "x": 0,
+        "y": 0
+      },
+      "offset": {
+        "x": 0,
+        "y": 0
+      },
+      "adaptations": {}
+    },
+    {
+      "itemId": "hair_05",
+      "name": "柔顺长发",
+      "category": "hair",
+      "asset": "/characters/source/hair_05.svg",
+      "price": 0,
+      "layer": 80,
+      "stats": {
+        "attack": 0,
+        "defense": 0,
+        "health": 0
+      },
+      "compatibleCharacters": [
+        "male_01",
+        "male_02",
+        "male_03",
+        "female_01",
+        "female_02",
+        "female_03"
+      ],
+      "unlockCondition": "none",
+      "anchor": {
+        "x": 0,
+        "y": 0
+      },
+      "offset": {
+        "x": 0,
+        "y": 0
+      },
+      "adaptations": {}
+    },
+    {
+      "itemId": "hair_06",
+      "name": "高马尾",
+      "category": "hair",
+      "asset": "/characters/source/hair_06.svg",
+      "price": 0,
+      "layer": 80,
+      "stats": {
+        "attack": 0,
+        "defense": 0,
+        "health": 0
+      },
+      "compatibleCharacters": [
+        "male_01",
+        "male_02",
+        "male_03",
+        "female_01",
+        "female_02",
+        "female_03"
+      ],
+      "unlockCondition": "none",
+      "anchor": {
+        "x": 0,
+        "y": 0
+      },
+      "offset": {
+        "x": 0,
+        "y": 0
+      },
+      "adaptations": {}
+    },
+    {
+      "itemId": "top_tee",
+      "name": "奶油 T 恤",
+      "category": "top",
+      "asset": "/characters/source/top_tee.svg",
+      "price": 0,
+      "layer": 50,
+      "stats": {
+        "attack": 0,
+        "defense": 0,
+        "health": 0
+      },
+      "compatibleCharacters": [
+        "male_01",
+        "male_02",
+        "male_03",
+        "female_01",
+        "female_02",
+        "female_03"
+      ],
+      "unlockCondition": "none",
+      "anchor": {
+        "x": 0,
+        "y": 0
+      },
+      "offset": {
+        "x": 0,
+        "y": 0
+      },
+      "adaptations": {}
+    },
+    {
+      "itemId": "top_shirt",
+      "name": "职场衬衫",
+      "category": "top",
+      "asset": "/characters/source/top_shirt.svg",
+      "price": 0,
+      "layer": 50,
+      "stats": {
+        "attack": 0,
+        "defense": 0,
+        "health": 0
+      },
+      "compatibleCharacters": [
+        "male_01",
+        "male_02",
+        "male_03",
+        "female_01",
+        "female_02",
+        "female_03"
+      ],
+      "unlockCondition": "none",
+      "anchor": {
+        "x": 0,
+        "y": 0
+      },
+      "offset": {
+        "x": 0,
+        "y": 0
+      },
+      "adaptations": {}
+    },
+    {
+      "itemId": "top_hoodie",
+      "name": "蓝莓卫衣",
+      "category": "top",
+      "asset": "/characters/source/top_hoodie.svg",
+      "price": 250,
+      "layer": 50,
+      "stats": {
+        "attack": 0,
+        "defense": 6,
+        "health": 0
+      },
+      "compatibleCharacters": [
+        "male_01",
+        "male_02",
+        "male_03",
+        "female_01",
+        "female_02",
+        "female_03"
+      ],
+      "unlockCondition": "none",
+      "anchor": {
+        "x": 0,
+        "y": 0
+      },
+      "offset": {
+        "x": 0,
+        "y": 0
+      },
+      "adaptations": {}
+    },
+    {
+      "itemId": "top_coat",
+      "name": "焦糖外套",
+      "category": "top",
+      "asset": "/characters/source/top_coat.svg",
+      "price": 400,
+      "layer": 50,
+      "stats": {
+        "attack": 0,
+        "defense": 10,
+        "health": 5
+      },
+      "compatibleCharacters": [
+        "male_01",
+        "male_02",
+        "male_03",
+        "female_01",
+        "female_02",
+        "female_03"
+      ],
+      "unlockCondition": "none",
+      "anchor": {
+        "x": 0,
+        "y": 0
+      },
+      "offset": {
+        "x": 0,
+        "y": 0
+      },
+      "adaptations": {}
+    },
+    {
+      "itemId": "bottom_trousers",
+      "name": "深蓝长裤",
+      "category": "bottom",
+      "asset": "/characters/source/bottom_trousers.svg",
+      "price": 0,
+      "layer": 40,
+      "stats": {
+        "attack": 0,
+        "defense": 0,
+        "health": 0
+      },
+      "compatibleCharacters": [
+        "male_01",
+        "male_02",
+        "male_03",
+        "female_01",
+        "female_02",
+        "female_03"
+      ],
+      "unlockCondition": "none",
+      "anchor": {
+        "x": 0,
+        "y": 0
+      },
+      "offset": {
+        "x": 0,
+        "y": 0
+      },
+      "adaptations": {}
+    },
+    {
+      "itemId": "bottom_shorts",
+      "name": "休闲短裤",
+      "category": "bottom",
+      "asset": "/characters/source/bottom_shorts.svg",
+      "price": 120,
+      "layer": 40,
+      "stats": {
+        "attack": 0,
+        "defense": 3,
+        "health": 0
+      },
+      "compatibleCharacters": [
+        "male_01",
+        "male_02",
+        "male_03",
+        "female_01",
+        "female_02",
+        "female_03"
+      ],
+      "unlockCondition": "none",
+      "anchor": {
+        "x": 0,
+        "y": 0
+      },
+      "offset": {
+        "x": 0,
+        "y": 0
+      },
+      "adaptations": {}
+    },
+    {
+      "itemId": "bottom_skirt",
+      "name": "百褶裙",
+      "category": "bottom",
+      "asset": "/characters/source/bottom_skirt.svg",
+      "price": 180,
+      "layer": 40,
+      "stats": {
+        "attack": 0,
+        "defense": 4,
+        "health": 0
+      },
+      "compatibleCharacters": [
+        "male_01",
+        "male_02",
+        "male_03",
+        "female_01",
+        "female_02",
+        "female_03"
+      ],
+      "unlockCondition": "none",
+      "anchor": {
+        "x": 0,
+        "y": 0
+      },
+      "offset": {
+        "x": 0,
+        "y": 0
+      },
+      "adaptations": {}
+    },
+    {
+      "itemId": "shoes_sneakers",
+      "name": "云朵运动鞋",
+      "category": "shoes",
+      "asset": "/characters/source/shoes_sneakers.svg",
+      "price": 0,
+      "layer": 45,
+      "stats": {
+        "attack": 0,
+        "defense": 0,
+        "health": 0
+      },
+      "compatibleCharacters": [
+        "male_01",
+        "male_02",
+        "male_03",
+        "female_01",
+        "female_02",
+        "female_03"
+      ],
+      "unlockCondition": "none",
+      "anchor": {
+        "x": 0,
+        "y": 0
+      },
+      "offset": {
+        "x": 0,
+        "y": 0
+      },
+      "adaptations": {}
+    },
+    {
+      "itemId": "shoes_leather",
+      "name": "经典皮鞋",
+      "category": "shoes",
+      "asset": "/characters/source/shoes_leather.svg",
+      "price": 150,
+      "layer": 45,
+      "stats": {
+        "attack": 0,
+        "defense": 4,
+        "health": 0
+      },
+      "compatibleCharacters": [
+        "male_01",
+        "male_02",
+        "male_03",
+        "female_01",
+        "female_02",
+        "female_03"
+      ],
+      "unlockCondition": "none",
+      "anchor": {
+        "x": 0,
+        "y": 0
+      },
+      "offset": {
+        "x": 0,
+        "y": 0
+      },
+      "adaptations": {}
+    },
+    {
+      "itemId": "hat_cap",
+      "name": "棒球帽",
+      "category": "hat",
+      "asset": "/characters/source/hat_cap.svg",
+      "price": 100,
+      "layer": 100,
+      "stats": {
+        "attack": 0,
+        "defense": 2,
+        "health": 0
+      },
+      "compatibleCharacters": [
+        "male_01",
+        "male_02",
+        "male_03",
+        "female_01",
+        "female_02",
+        "female_03"
+      ],
+      "unlockCondition": "none",
+      "anchor": {
+        "x": 0,
+        "y": 0
+      },
+      "offset": {
+        "x": 0,
+        "y": 0
+      },
+      "adaptations": {}
+    },
+    {
+      "itemId": "hat_beanie",
+      "name": "暖冬针织帽",
+      "category": "hat",
+      "asset": "/characters/source/hat_beanie.svg",
+      "price": 140,
+      "layer": 100,
+      "stats": {
+        "attack": 0,
+        "defense": 3,
+        "health": 3
+      },
+      "compatibleCharacters": [
+        "male_01",
+        "male_02",
+        "male_03",
+        "female_01",
+        "female_02",
+        "female_03"
+      ],
+      "unlockCondition": "none",
+      "anchor": {
+        "x": 0,
+        "y": 0
+      },
+      "offset": {
+        "x": 0,
+        "y": 0
+      },
+      "adaptations": {}
+    },
+    {
+      "itemId": "accessory_glasses",
+      "name": "轻盈圆框眼镜",
+      "category": "accessory",
+      "asset": "/characters/source/accessory_glasses.svg",
+      "price": 120,
+      "layer": 110,
+      "stats": {
+        "attack": 0,
+        "defense": 2,
+        "health": 0
+      },
+      "compatibleCharacters": [
+        "male_01",
+        "male_02",
+        "male_03",
+        "female_01",
+        "female_02",
+        "female_03"
+      ],
+      "unlockCondition": "none",
+      "anchor": {
+        "x": 0,
+        "y": 0
+      },
+      "offset": {
+        "x": 0,
+        "y": 0
+      },
+      "adaptations": {}
+    },
+    {
+      "itemId": "accessory_bag",
+      "name": "职场小背包",
+      "category": "accessory",
+      "asset": "/characters/source/accessory_bag.svg",
+      "price": 200,
+      "layer": 20,
+      "stats": {
+        "attack": 0,
+        "defense": 5,
+        "health": 5
+      },
+      "compatibleCharacters": [
+        "male_01",
+        "male_02",
+        "male_03",
+        "female_01",
+        "female_02",
+        "female_03"
+      ],
+      "unlockCondition": "none",
+      "anchor": {
+        "x": 0,
+        "y": 0
+      },
+      "offset": {
+        "x": 0,
+        "y": 0
+      },
+      "adaptations": {}
+    },
+    {
+      "itemId": "weapon_gloves",
+      "name": "训练拳套",
+      "category": "weapon",
+      "asset": "/characters/source/weapon_gloves.svg",
+      "price": 200,
+      "layer": 90,
+      "stats": {
+        "attack": 15,
+        "defense": 0,
+        "health": 0
+      },
+      "compatibleCharacters": [
+        "male_01",
+        "male_02",
+        "male_03",
+        "female_01",
+        "female_02",
+        "female_03"
+      ],
+      "unlockCondition": "none",
+      "anchor": {
+        "x": 0,
+        "y": 0
+      },
+      "offset": {
+        "x": 0,
+        "y": 0
+      },
+      "adaptations": {}
+    },
+    {
+      "itemId": "weapon_staff",
+      "name": "练习木棍",
+      "category": "weapon",
+      "asset": "/characters/source/weapon_staff.svg",
+      "price": 300,
+      "layer": 90,
+      "stats": {
+        "attack": 25,
+        "defense": 0,
+        "health": 0
+      },
+      "compatibleCharacters": [
+        "male_01",
+        "male_02",
+        "male_03",
+        "female_01",
+        "female_02",
+        "female_03"
+      ],
+      "unlockCondition": "none",
+      "anchor": {
+        "x": 0,
+        "y": 0
+      },
+      "offset": {
+        "x": 0,
+        "y": 0
+      },
+      "adaptations": {}
+    },
+    {
+      "itemId": "weapon_sword",
+      "name": "星光训练剑",
+      "category": "weapon",
+      "asset": "/characters/source/weapon_sword.svg",
+      "price": 500,
+      "layer": 90,
+      "stats": {
+        "attack": 40,
+        "defense": 0,
+        "health": 0
+      },
+      "compatibleCharacters": [
+        "male_01",
+        "male_02",
+        "male_03",
+        "female_01",
+        "female_02",
+        "female_03"
+      ],
+      "unlockCondition": "none",
+      "anchor": {
+        "x": 0,
+        "y": 0
+      },
+      "offset": {
+        "x": 0,
+        "y": 0
+      },
+      "adaptations": {}
+    }
+  ]
+}

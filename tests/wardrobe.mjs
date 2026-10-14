@@ -1,0 +1,21 @@
+import assert from 'node:assert/strict';
+import catalog from '../shared/characters.json' with {type:'json'};
+const base=process.env.TEST_BASE||'http://localhost:8080';
+const phone=process.env.TEST_PHONE||'17099996666';const password='Test-only-Password-2026';let cookie;
+async function req(path,body,method=body?'POST':'GET'){const r=await fetch(base+path,{method,headers:{'Content-Type':'application/json',...(cookie?{cookie}:{})},body:body?JSON.stringify(body):undefined});const json=await r.json();return {status:r.status,json,cookie:r.headers.get('set-cookie')?.split(';')[0]};}
+const registered=await req('/api/auth/register',{phone,password});assert.equal(registered.status,200);cookie=registered.cookie;
+assert.equal(catalog.characters.length,6);assert.equal(catalog.characters.filter(c=>c.gender==='male').length,3);
+let w=(await req('/api/character')).json;assert.equal(w.coins,1280);assert.ok(w.ownedItems.includes('top_shirt'));assert.ok(!w.ownedItems.includes('weapon_sword'));
+assert.equal((await req('/api/character',{...w.appearance,equipped:{...w.appearance.equipped,weapon:'weapon_sword'}},'PUT')).status,400);
+const buys=await Promise.all(Array.from({length:8},()=>req('/api/character/buy',{itemId:'weapon_sword',characterId:'male_01'})));for(const b of buys)assert.equal(b.status,200);
+w=(await req('/api/character')).json;assert.equal(w.coins,780);assert.equal(w.ownedItems.filter(i=>i==='weapon_sword').length,1);
+let result=await req('/api/character',{...w.appearance,characterId:'female_03',equipped:{...w.appearance.equipped,hair:'hair_06',weapon:'weapon_sword'}},'PUT');assert.equal(result.status,200);w=result.json;assert.equal(w.stats.attack,360);
+assert.equal((await req('/api/character',{...w.appearance,revision:0},'PUT')).status,409);
+assert.equal((await req('/api/character',{...w.appearance,equipped:{...w.appearance.equipped,top:'weapon_sword'}},'PUT')).status,400);
+await req('/api/character/buy',{itemId:'top_coat',characterId:'female_03'});await req('/api/character/buy',{itemId:'weapon_staff',characterId:'female_03'});
+assert.equal((await req('/api/character/buy',{itemId:'top_hoodie',characterId:'female_03'})).status,400);
+w=(await req('/api/character')).json;assert.equal(w.coins,80);
+w=(await req('/api/character',{...w.appearance,equipped:{...w.appearance.equipped,top:'top_coat'}},'PUT')).json;assert.equal(w.stats.defense,10);assert.equal(w.stats.maxHp,105);
+const wage=await req('/api/game/action',{action:'wage'});assert.equal(wage.status,200);assert.equal(wage.json.coins,180);assert.equal((await req('/api/game/action',{action:'wage'})).status,400);
+const restored=(await req('/api/character')).json;assert.equal(restored.appearance.characterId,'female_03');assert.equal(restored.appearance.equipped.weapon,'weapon_sword');assert.equal(restored.coins,180);
+console.log('PASS: 6 characters, ownership, 8 concurrent duplicate purchases charged once, balances, categories, stale revision, attributes, inventory and appearance recovery, shared wallet actions');

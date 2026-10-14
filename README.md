@@ -1,53 +1,32 @@
 # 仇恨体系
 
-手机优先的社交策略小游戏。当前交付为**主界面可交互原型**，不是已上线的多人游戏。
+React 19 + TypeScript + Vite 手机游戏原型，Express + PostgreSQL 同源后端。线上地址：https://gerous-game-ibppyqeh.sealoshzh.site/
 
 ## 运行
 
-需要 Node.js 22 或以上版本。
+Node.js 22+。`npm install`，配置 `PGHOST/PGPORT/PGUSER/PGPASSWORD/PGDATABASE` 后 `npm run server`；另一个终端 `npm run dev`，API 代理到 8080。`npm run build` 生成 dist。生产必须运行 Node 后端，不能仅部署静态文件。
 
-```sh
-npm install
-npm run dev
-```
+## 角色与换装
 
-电脑访问终端显示的地址；同一 Wi-Fi 的手机访问 `http://电脑局域网IP:5173`。本地防火墙需允许该端口。
+「我的 → 我的角色与衣橱」或首页全身角色进入。提供选择、换装、背包、详情四个页面，6 个角色（男女各3），发型、上衣、下装、鞋子、帽子、饰品、武器7类。点击物品实时分层预览，未拥有物品购买后永久入库，保存穿戴后属性生效。支持卸下、默认搭配、角色滑动切换。
 
-```sh
-npm run build
-npm run preview
-```
+- 配置：`shared/characters.json`。
+- 前端：`src/characters/`，原生 SVG 分层，无复杂 3D 引擎。
+- 原始素材：`public/characters/source/`；`python3 scripts/generate-character-assets.py` 可重建配置和素材（编辑配置后不要盲目重建）。
+- 服务端：`server/wardrobe.mjs`，钱包、库存、交易流水、人物外观分表；事务锁钱包，服务端验证价格和库存归属。
+- `/api/character` GET/PUT，`/api/character/buy` POST，`/api/game` GET，`/api/game/action` POST。
+- 离线支持已拥有搭配本机保存；联网按 revision 校验同步，冲突需要在衣橱处理。离线购买和金币操作禁用。Service Worker 缓存页面及角色素材，不缓存 API。
 
-静态部署上传 `dist` 内容即可，资源采用相对路径，可部署到 GitHub Pages 子目录。
+当前美术是原创可编辑 SVG **功能占位素材**，不是最终精致 3D Q 版渲染。缺失资产及统一制作规格见 `docs/character-art-spec.md`，版权来源见 `docs/character-asset-provenance.json`。未复制参考项目美术。
 
-## 本版内容
+## 游戏数据与限制
 
-- 苹果系浅色主界面、角色卡片、生命条、武力、金币和行动力。
-- 首页、仇恨、战斗、资产四项导航。
-- 训练、工资领取、金库存取的本地状态演示。
-- 好友列表、战报、排行榜、通知、设置弹层。
-- 自动战斗前冲、受击、伤害数字和血条动画演示。
-- 手机安全区域、桌面布局、减少动态效果适配。
+手机号密码账号、记住登录90天、好友邀请关系已存 PostgreSQL。钱包、训练、食物、卡片、装备和 HP 都由服务端保存；基础 HP 100，每分钟恢复0.5，装备可增加上限。现有战斗仍是演示规则，未完成双方实时 PVP 结算。手机号归属验证与找回密码未接入。
 
-所有数据为示例，刷新会重置。战斗伤害用于动画预览，不修改真实资产。未接入登录、数据库、真实联机、后台通知或 PWA 离线缓存。后续真实业务计算必须迁移至服务端，不能沿用客户端演示交易作为权威结算。
+## 验证
 
-技术：React、TypeScript、Vite、Motion、Lucide，自定义 CSS 设计系统。
+`npm run build`；`node tests/character-assets.mjs` 验证34个SVG并生成六角色组合图。`TEST_BASE=http://localhost:8080 TEST_PHONE=<独立测试手机号> node tests/wardrobe.mjs` 验证交易、库存、属性、存档和冲突。API 测试会创建账号并修改其钱包，仅使用测试账号/数据库。
 
-## 容器与 Sealos 部署
+## 部署
 
-项目提供 `Dockerfile`，构建阶段生成静态资源，运行阶段由 Nginx 在 `8080` 端口提供服务。当前版本没有数据库或需要持久化的服务端数据，因此不挂载存储；后续接入数据库时必须改用持久化卷并先备份数据。镜像中不包含环境密钥。
-
-```sh
-docker login ccr.ccs.tencentyun.com
-docker buildx build --platform linux/amd64 \
-  -t ccr.ccs.tencentyun.com/tenvoice/gerous-game:v0.1.0 \
-  --push .
-```
-
-`deploy/sealos.yaml` 是 Sealos 应用模板，使用 TCR 私有镜像、`8080` 容器端口、HTTPS Ingress 和健康检查。私有仓库拉取凭据应在 Sealos 的应用配置中作为 Image Pull Secret 管理，不要提交到 Git。
-
-当前公网预览：
-
-<https://gerous-game-ibppyqeh.sealoshzh.site>
-
-后续更新时，先构建新的 `vX.Y.Z` 镜像并推送 TCR，再在 Sealos 原应用 `gerous-game-ehlezgsv` 中更新镜像，继续沿用原 Service、Ingress 和访问地址。
+`Dockerfile` 构建前端并运行 Node，同源端口8080。镜像必须 linux/amd64。模板 `deploy/sealos.yaml`，已部署应用更新补丁 `deploy/backend-patch.json`。原应用 `gerous-game-ehlezgsv`，数据库 `gerous-users-db-20261014-pg`（3Gi PVC）；凭据通过 Kubernetes Secret 注入，不提交到仓库。

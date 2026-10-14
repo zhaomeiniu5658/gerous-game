@@ -1,0 +1,11 @@
+{
+  "assetFamily": "gerous-layered-character-v1",
+  "source": "scripts/generate-character-assets.py",
+  "editableSources": "public/characters/source/*.svg",
+  "creator": "本项目程序绘制",
+  "thirdPartyArtworkCopied": false,
+  "productionArtStatus": "functional-placeholder",
+  "referenceOnly": ["https://github.com/pjanaya/2d-character-creator", "https://vroid.com/en/studio"],
+  "canvas": [1000, 1600],
+  "futureAssetsMustInclude": ["author", "source", "license", "adaptations", "originalFile"]
+}

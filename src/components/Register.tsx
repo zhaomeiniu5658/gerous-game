@@ -1,0 +1,6 @@
+import { useState } from 'react';
+import { Smartphone, X } from 'lucide-react';
+export function Register({ onClose, onRegister }: { onClose: () => void; onRegister: (phone: string) => string | null }) {
+ const [phone, setPhone] = useState(''); const [error, setError] = useState('');
+ return <div className="modal-layer" onClick={onClose}><form className="sheet register-sheet" role="dialog" aria-modal="true" aria-label="手机号注册" onClick={e => e.stopPropagation()} onSubmit={e => { e.preventDefault(); const value = phone.trim(); if (!/^1[3-9]\d{9}$/.test(value)) return setError('请输入正确的 11 位手机号'); const message = onRegister(value); if (message) setError(message); }}><button type="button" className="close" aria-label="关闭注册" onClick={onClose}><X/></button><div className="register-icon"><Smartphone size={31}/></div><h2>手机号注册</h2><p>用手机号加入你的职场江湖</p><label htmlFor="register-phone">手机号（同时作为个人 ID）</label><input autoFocus id="register-phone" type="tel" inputMode="numeric" autoComplete="tel-national" maxLength={11} placeholder="请输入 11 位手机号" value={phone} onChange={e => { setPhone(e.target.value); setError(''); }} aria-invalid={!!error}/>{error && <p className="form-error" role="alert">{error}</p>}<button className="primary" type="submit">注册并进入</button><small>本机注册体验，尚未接入短信验证与云端账号</small></form></div>;
+}

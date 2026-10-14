@@ -1,0 +1,7 @@
+import { useState } from 'react';
+import { catalog,type Appearance } from './types';
+export function CharacterStage({appearance,headOnly=false,className=''}:{appearance:Appearance;headOnly?:boolean;className?:string}){
+ const [failed,setFailed]=useState<string[]>([]);const[retry,setRetry]=useState(0);const character=catalog.characters.find(c=>c.characterId===appearance.characterId)||catalog.characters[0];
+ const layers=[...(!headOnly?[{asset:character.baseAsset,layer:10,offset:{x:0,y:0},anchor:{x:0,y:0}}]:[]),{asset:character.headAsset,layer:75,offset:{x:0,y:0},anchor:{x:0,y:0}},...Object.values(appearance.equipped).map(id=>catalog.items.find(i=>i.itemId===id)).filter(i=>i&&(!headOnly||['hair','hat'].includes(i.category)||i.itemId==='accessory_glasses')).map(i=>i!)].sort((a,b)=>a.layer-b.layer);
+ return <div className={'character-stage '+className}><svg viewBox={headOnly?'100 0 800 800':'0 0 1000 1600'} role="img" aria-label={character.name+(headOnly?'头像':'完整全身角色')}><title>{character.name} · {character.gender==='male'?'男':'女'} · {character.face}</title>{layers.map(layer=><image key={layer.asset} href={layer.asset+(retry?'?retry='+retry:'')} x={layer.anchor.x+layer.offset.x} y={layer.anchor.y+layer.offset.y} width="1000" height="1600" onError={()=>setFailed(f=>f.includes(layer.asset)?f:[...f,layer.asset])}/>)}</svg>{failed.length>0&&<div className="character-load-error" role="alert">有 {failed.length} 个素材未加载<button onClick={()=>{setFailed([]);setRetry(v=>v+1);}}>重新加载</button></div>}</div>;
+}

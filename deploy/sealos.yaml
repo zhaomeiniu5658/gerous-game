@@ -27,7 +27,7 @@ kind: Deployment
 metadata:
   name: ${{ defaults.app_name }}
   annotations:
-    originImageName: ccr.ccs.tencentyun.com/tenvoice/gerous-game:v0.1.0
+    originImageName: ccr.ccs.tencentyun.com/tenvoice/gerous-game:v0.5.2-20261014
     deploy.cloud.sealos.io/minReplicas: '1'
     deploy.cloud.sealos.io/maxReplicas: '1'
   labels:
@@ -50,8 +50,18 @@ spec:
         - name: gerous-game-tcr
       containers:
         - name: ${{ defaults.app_name }}
-          image: ccr.ccs.tencentyun.com/tenvoice/gerous-game:v0.1.0
+          image: ccr.ccs.tencentyun.com/tenvoice/gerous-game:v0.5.2-20261014
           imagePullPolicy: IfNotPresent
+          env:
+            - {name: PGHOST, value: gerous-users-db-20261014-pg-postgresql}
+            - {name: PGPORT, value: '5432'}
+            - {name: PGDATABASE, value: postgres}
+            - name: PGUSER
+              valueFrom:
+                secretKeyRef: {name: gerous-users-db-20261014-pg-conn-credential, key: username}
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef: {name: gerous-users-db-20261014-pg-conn-credential, key: password}
           ports:
             - containerPort: 8080
           resources:
